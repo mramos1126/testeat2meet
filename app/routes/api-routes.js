@@ -49,7 +49,7 @@ module.exports = function(app){
 //   });
 
 
-	app.post('/api/signup', function(req, res){
+	app.post('/api/signup2', function(req, res){
 
 		// Take the request...
 		var person = req.body;
@@ -62,9 +62,12 @@ module.exports = function(app){
 			firstName: person.firstName,
 			lastName: person.lastName,
 			userName: person.userName,
+			passWord : person.passWord,
+			photo : person.photo,
 			age: person.age,
 			email: person.email,
 			gender:person.gender,
+			genderPref : person.genderPref,
 			food:person.food,
 			location:person.location
 		});

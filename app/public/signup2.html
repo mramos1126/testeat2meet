@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" method="POST" role="form" class="form-horizontal">
+				<form action="/api/signup2" method="POST" role="form" class="form-horizontal">
 					<legend>Sign Up to Start Meeting Eaters!</legend>
 				
 					<div class="form-group">
@@ -26,20 +26,38 @@
 					</div>
 
 					<div class="form-group">
-						<label for="#ag">Age</label>
-						<input type="text" class="form-control" id="" placeholder="Input field">
+						<label for="#age">Age</label>
+						<input type="text" class="form-control" id="age" placeholder="Input field">
 					</div>
 
 					<div class="form-group">
-						<label for="#sex">Sex</label>
-						<div class="radio" id="age">
+						<label for="#gender">I am a ...</label>
+						<div class="radio" id="gender">
 							<label>
-								<input type="radio" name="sex" id="" value="M">
+								<input type="radio" name="sex" id="" value="male">
 								Male
 							</label>
 							<label>
-								<input type="radio" name="sex" id="" value="F">
+								<input type="radio" name="sex" id="" value="female">
 								Female
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="#genderPref">Looking to eat with a ...</label>
+						<div class="radio" id="genderPref">
+							<label>
+								<input type="radio" name="sex" id="" value="male">
+								Male
+							</label>
+							<label>
+								<input type="radio" name="sex" id="" value="female">
+								Female
+							</label>
+							<label>
+								<input type="radio" name="sex" id="" value="nopref">
+								No Preference
 							</label>
 						</div>
 					</div>
@@ -52,12 +70,12 @@
 					<div class="alert alert-info">
 						<div class="form-group">
 							<label for="#username">Username</label>
-							<input type="text" class="form-control" id="username" placeholder="http://">
+							<input type="text" class="form-control" id="userName" >
 						</div>
 
 						<div class="form-group">
 							<label for="#password">Password</label>
-							<input type="password" class="form-control" id="password" placeholder="http://">
+							<input type="password" class="form-control" id="passWord">
 						</div>
 					</div>
 
@@ -68,18 +86,62 @@
 						</div>
 
 						<div class="form-group">
-							<label for="#food">food</label>
+							<label for="#food">Food</label>
 							<input type="text" class="form-control" id="food" placeholder="Food for eating.">
 						</div>
 					</div>
-					
-
 
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('#meetMeat').on("click", function(){
+//console.log('test');
+var newMeetup = 
+{
+	firstName: $("#firstName").val().trim(),
+	lastName: $("#lastName").val().trim(),
+	age: $("#age").val().trim(),
+	userName: $("#userName").val().trim(),
+	userName: $("#passWord").val().trim(),
+	gender: $('input[name = gender]:checked').val().trim(),
+	genderPref: $('input[name = genderPref]:checked').val().trim(),
+	photo: $("#photo").val().trim(),
+	email: $("#email").val().trim(),
+	food: $("#food").val().trim(),
+	location: $("#location").val().trim()
+
+};
+
+console.log(newMeetup);
+var currentURL = window.location.origin;
+
+
+$.post( currentURL + '/api/signup2', newMeetup)
+.done(function(data){
+	console.log(data);
+})	
+$("#firstName").val('');
+$("#lastName").val('');
+$("#age").val('');
+$("#userName").val().trim(),
+$("#passWord").val().trim(),
+$('input[name = gender]:checked').val().trim(),
+$('input[name = genderPref]:checked').val().trim(),
+$("#photo").val().trim()
+$("#email").val('');
+$("#location").val('');
+$("#food").val('');
+
+return false;
+});
+
+
+	});
+
+	</script>
 </body>
 </html>
